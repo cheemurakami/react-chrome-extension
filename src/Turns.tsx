@@ -37,7 +37,7 @@ align-items: center;
 display: flex;
 justify-content: center;
 
-@media (max-width: 600px) {
+@media (max-width: 300px) {
     flex-direction: column;
   }
 `
@@ -53,6 +53,10 @@ const Button = styled.button`
   color: white;
   margin-bottom: 8px;
   margin-top: 8px;
+  
+  &:hover{
+    background-color: #84D2F6;
+  }
 `
 
 const Input = styled.input`
