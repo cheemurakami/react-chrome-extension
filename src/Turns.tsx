@@ -8,8 +8,10 @@ const Turns: React.FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    setNameList([...nameList, inputValue])
-    setInputValue('')
+    if (inputValue !== "") {
+      setNameList([...nameList, inputValue])
+      setInputValue('')
+    }
   }
 
   return (
@@ -18,7 +20,12 @@ const Turns: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <InputContainer>
           <InputDiv>
-            <Input type='text' placeholder='Type name' onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
+            <Input
+              type='text'
+              placeholder='Type name'
+              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue}
+            />
           </InputDiv>
           <ButtonDiv>
             <Button type='submit'>Add</Button>
@@ -27,7 +34,8 @@ const Turns: React.FC = () => {
         </InputContainer>
       </form>
 
-      {nameList.length > 0 && <Names nameList={nameList} />}
+      {nameList.length > 0 &&
+        <Names nameList={nameList} setNameList={setNameList} />}
     </>
   )
 }
