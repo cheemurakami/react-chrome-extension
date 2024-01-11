@@ -39,7 +39,7 @@ const NameDiv = styled.div`
   display: flex;
   height: 36px;
   justify-content: space-between;
-  margin: 4px 16px;
+  margin: 8px 16px;
 `;
 
 const NameText = styled.div``;

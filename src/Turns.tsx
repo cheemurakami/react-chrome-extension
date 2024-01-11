@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Turns: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('')
   const [nameList, setNameList] = useState<string[]>([])
+  const [buttonText, setButtonText] = useState<string>('Start')
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
@@ -28,11 +29,14 @@ const Turns: React.FC = () => {
             />
           </InputDiv>
           <ButtonDiv>
-            <Button type='submit'>Add</Button>
-
+            <AddButton type='submit'>Add</AddButton>
           </ButtonDiv>
         </InputContainer>
       </form>
+
+      <ButtonDiv>
+        <StartNextButton onClick={() => setButtonText("Next")}>{buttonText}</StartNextButton>
+      </ButtonDiv>
 
       {nameList.length > 0 &&
         <Names nameList={nameList} setNameList={setNameList} />}
@@ -56,7 +60,7 @@ const InputDiv = styled.div`
 const ButtonDiv = styled.div`
 `
 
-const Button = styled.button`
+const AddButton = styled.button`
   background-color: #91E5F6;
   color: white;
   margin-bottom: 8px;
@@ -74,6 +78,16 @@ const Input = styled.input`
   font-size: 16px;
   height: 40px;
   margin-right: 20px;
-`
+  `
 
+const StartNextButton = styled.button`
+  background-color: #99D19C;
+  color: white;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  
+  &:hover{
+    background-color: #73AB84;
+  }
+`
 export default Turns
