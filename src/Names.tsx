@@ -27,7 +27,7 @@ const Names: React.FC<Props> = (props) => {
   const StarIcon: React.FC = () => {
     return (
       <TurnIconDiv>
-        <FaStar color='#F5A700' />
+        <FaStar size={24} color='#F5A700' />
       </TurnIconDiv>
     )
   }
@@ -37,13 +37,13 @@ const Names: React.FC<Props> = (props) => {
       {nameList.map((memberInfo) => {
         return (
           <NameDiv key={memberInfo.id}>
-            <NameText>{memberInfo.name}</NameText>
-            <IconContainer>
+            <NameAndTurnContainer>
+              <NameText>{memberInfo.name}</NameText>
               {(turn === memberInfo.id) ? <StarIcon /> : null}
-              <TrashIconDiv onClick={() => removeName(memberInfo.id)}>
-                <FaRegTrashAlt />
-              </TrashIconDiv>
-            </IconContainer>
+            </NameAndTurnContainer>
+            <TrashIconDiv onClick={() => removeName(memberInfo.id)}>
+              <FaRegTrashAlt />
+            </TrashIconDiv>
           </NameDiv>
         );
       })}
@@ -61,9 +61,11 @@ const NameDiv = styled.div`
   margin: 8px 16px;
 `;
 
-const NameText = styled.div``;
+const NameText = styled.div`
+  font-size: 1.2rem;
+`;
 
-const IconContainer = styled.div`
+const NameAndTurnContainer = styled.div`
   align-items: center;
   display: flex;
   height: 36px;
