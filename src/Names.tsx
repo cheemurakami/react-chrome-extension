@@ -1,31 +1,47 @@
 import React from "react";
 import styled from "styled-components";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaStar, FaRegTrashAlt } from "react-icons/fa";
+
+interface Member {
+  id: string;
+  name: string
+}
+
 interface Props {
-  nameList: string[];
-  setNameList: (arg: string[]) => void;
+  nameList: Member[];
+  setNameList: (arg: Member[]) => void;
+  turn: null | string;
 }
 
 const Names: React.FC<Props> = (props) => {
-  const { nameList, setNameList } = props;
+  const { nameList, setNameList, turn } = props;
 
-  const removeName = (name: string) => {
-    const newList = nameList.filter((n) => n !== name);
+  const removeName = (id: string) => {
+    const newList = nameList.filter((n) => n.id !== id);
     setNameList(newList);
   };
 
+  const StarIcon: React.FC = () => {
+    return (
+      <TurnIconDiv>
+        <FaStar color='#F5A700' />
+      </TurnIconDiv>
+    )
+  }
+
   return (
     <TurnContainer>
-      {nameList.map((name) => {
+      {nameList.map((memberInfo) => {
         return (
-          <>
-            <NameDiv key={name}>
-              <NameText>{name}</NameText>
-              <IconDiv onClick={() => removeName(name)}>
+          <NameDiv key={memberInfo.id}>
+            <NameText>{memberInfo.name}</NameText>
+            <IconContainer>
+              {(turn === memberInfo.id) ? <StarIcon /> : null}
+              <TrashIconDiv onClick={() => removeName(memberInfo.id)}>
                 <FaRegTrashAlt />
-              </IconDiv>
-            </NameDiv>
-          </>
+              </TrashIconDiv>
+            </IconContainer>
+          </NameDiv>
         );
       })}
     </TurnContainer>
@@ -44,14 +60,29 @@ const NameDiv = styled.div`
 
 const NameText = styled.div``;
 
-const IconDiv = styled.button`
+const IconContainer = styled.div`
+  align-items: center;
+  display: flex;
+  height: 36px;
+  justify-content: space-between;
+  margin: 8px 16px;
+`;
+
+const TrashIconDiv = styled.button`
   background-color: #59a5d8;
   border-radius: 8px;
   cursor: pointer;
+  color: black;
   font-size: 0.8em;
 
   &:hover {
     background-color: #386fa4;
   }
+`;
+
+const TurnIconDiv = styled.button`
+  background-color: #fff;
+  border-radius: 8px;
+  font-size: 0.8em;
 `;
 export default Names;
