@@ -16,10 +16,10 @@ const Turns: React.FC = () => {
   const [turnIndex, setTurnIndex] = useState<number>(0);
 
   useEffect(() => {
-    if (nameList && turn) {
+    if (nameList[turnIndex] && turn) {
       setTurn(nameList[turnIndex].id)
     }
-  }, [turnIndex, turn])
+  }, [turnIndex, turn, nameList])
 
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
@@ -40,7 +40,7 @@ const Turns: React.FC = () => {
   const changeTurn = () => {
     if (turnIndex < nameList.length - 1) {
       setTurnIndex(turnIndex + 1);
-    } else if (turnIndex === nameList.length - 1) {
+    } else if (turnIndex === nameList.length - 1 || nameList[turnIndex] === undefined) {
       setTurnIndex(0);
     }
   };
@@ -71,7 +71,12 @@ const Turns: React.FC = () => {
       </ButtonDiv>
 
       {nameList.length > 0 && (
-        <Names nameList={nameList} setNameList={setNameList} turn={turn} />
+        <Names
+          nameList={nameList}
+          setNameList={setNameList}
+          turn={turn}
+          setTurn={setTurn}
+        />
       )}
     </>
   );

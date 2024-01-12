@@ -11,14 +11,17 @@ interface Props {
   nameList: Member[];
   setNameList: (arg: Member[]) => void;
   turn: null | string;
+  setTurn: (arg: string) => void;
 }
 
 const Names: React.FC<Props> = (props) => {
-  const { nameList, setNameList, turn } = props;
+  const { nameList, setNameList, turn, setTurn } = props;
 
   const removeName = (id: string) => {
     const newList = nameList.filter((n) => n.id !== id);
     setNameList(newList);
+
+    if (id === turn) setTurn(nameList[0].id)
   };
 
   const StarIcon: React.FC = () => {
