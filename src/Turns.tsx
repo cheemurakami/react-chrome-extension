@@ -18,6 +18,8 @@ const Turns: React.FC = () => {
   useEffect(() => {
     if (nameList[turnIndex] && turn) {
       setTurn(nameList[turnIndex].id)
+    } else if (nameList.length === 0){
+      setTurn(null)
     }
   }, [turnIndex, turn, nameList])
 
